@@ -1,8 +1,7 @@
 import './App.css';
 import React, {useState} from "react";
 import TaskList from "./Components/TaskList";
-import MyInput from "./Components/MyInput";
-import MyButton from "./Components/MyButton";
+
 
 
 function App() {
@@ -35,10 +34,8 @@ function App() {
         weight: 1,
     })
 
-    const [completeTaskPoints, setCompleteTaskPoints] = useState(0)
 
-    function createTask(e) {
-        e.preventDefault()
+    function createTask() {
         setTasks([...tasks, {...task, id: Date.now()}])
         setTask({
             id: '',
@@ -50,65 +47,38 @@ function App() {
         })
     }
 
-    function removeTask(task){
-        setTasks(tasks.filter(currentTask => currentTask.id !== task.id))
-        setCompleteTaskPoints(completeTaskPoints - task.weight)
+    function removeTask(task) {
+        setTasks(prev => prev.filter(t => t.id !== task.id))
     }
 
-    function completeTask(task){
-        setTasks(tasks.filter(currentTask => currentTask.id !== task.id))
-        setCompleteTaskPoints(completeTaskPoints + task.weight)
+    function completeTask(task) {
+        setTasks(prev => prev.filter(t => t.id !== task.id))
     }
+
+
 
     return (
         <div className="App">
-            <MyInput placeholder='Enter your title'
+            <input placeholder='Enter your title'
                    value={task.title}
                    onChange={event => setTask({...task, title: event.target.value})}/>
-            <MyInput placeholder='Enter your description'
+            <input placeholder='Enter your description'
                    value={task.description}
                    onChange={event => setTask({...task, description: event.target.value})}/>
-            <MyInput placeholder='Choose your day'
+            <input placeholder='Choose your day'
                    value={task.timeStamp}
                    onChange={event => setTask({...task, timeStamp: event.target.value})}/>
-            <MyButton  onClick={createTask}>Add Task</MyButton>
+            <button onClick={createTask}>Add task</button>
 
-            <h2>{completeTaskPoints}</h2>
+            <h2></h2>
 
-            {tasks.length === 0
-                ? <h2>Tasks not found</h2>
-                : <TaskList done={completeTask} remove={removeTask} day={'monday'} tasks={tasks}/>
-            }
-
-            {tasks.length === 0
-                ? <h2>Tasks not found</h2>
-                : <TaskList done={completeTask} remove={removeTask} day={'tuesday'} tasks={tasks}/>
-            }
-
-            {tasks.length === 0
-                ? <h2>Tasks not found</h2>
-                : <TaskList done={completeTask} remove={removeTask} day={'wednesday'} tasks={tasks}/>
-            }
-
-            {tasks.length === 0
-                ? <h2>Tasks not found</h2>
-                : <TaskList done={completeTask} remove={removeTask} day={'thursday'} tasks={tasks}/>
-            }
-
-            {tasks.length === 0
-                ? <h2>Tasks not found</h2>
-                : <TaskList done={completeTask} remove={removeTask} day={'friday'} tasks={tasks}/>
-            }
-
-            {tasks.length === 0
-                ? <h2>Tasks not found</h2>
-                : <TaskList done={completeTask} remove={removeTask} day={'saturday'} tasks={tasks}/>
-            }
-
-            {tasks.length === 0
-                ? <h2>Tasks not found</h2>
-                : <TaskList done={completeTask} remove={removeTask} day={'sunday'} tasks={tasks}/>
-            }
+            <TaskList completeTask={completeTask} removeTask={removeTask} day={'monday'} tasks={tasks}/>
+            <TaskList completeTask={completeTask} removeTask={removeTask} day={'tuesday'} tasks={tasks}/>
+            <TaskList completeTask={completeTask} removeTask={removeTask} day={'wednesday'} tasks={tasks}/>
+            <TaskList completeTask={completeTask} removeTask={removeTask} day={'thursday'} tasks={tasks}/>
+            <TaskList completeTask={completeTask} removeTask={removeTask} day={'friday'} tasks={tasks}/>
+            <TaskList completeTask={completeTask} removeTask={removeTask} day={'saturday'} tasks={tasks}/>
+            <TaskList completeTask={completeTask} removeTask={removeTask} day={'sunday'} tasks={tasks}/>
 
         </div>
     );
