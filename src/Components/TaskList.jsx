@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const TaskList = ({completeTask, removeTask, day, tasks}) => {
+const TaskList = ({removeTask, day, tasks, toggleComplete}) => {
 
     return (
         <div>
@@ -12,7 +12,7 @@ const TaskList = ({completeTask, removeTask, day, tasks}) => {
                 <h3>{index + 1}. {task.title}</h3>
                 <p>{task.description}</p>
                 <h4>{task.timeStamp}</h4>
-                <button onClick={() => completeTask(task) }>Done</button>
+                <input type="checkbox" onClick={() => toggleComplete(task.id)} checked={task.isDone}/>
                 <button onClick={() => removeTask(task)} >Delete</button>
             </>
             ))}

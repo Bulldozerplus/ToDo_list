@@ -3,7 +3,6 @@ import React, {useState} from "react";
 import TaskList from "./Components/TaskList";
 
 
-
 function App() {
 
     const [tasks, setTasks] = useState([
@@ -51,10 +50,15 @@ function App() {
         setTasks(prev => prev.filter(t => t.id !== task.id))
     }
 
-    function completeTask(task) {
-        setTasks(prev => prev.filter(t => t.id !== task.id))
+    function toggleComplete(id) {
+        setTasks(prevState => prevState.map(task => {
+            if (task.id === id) {
+               return task.isDone = !task.isDone
+            } else {
+                return task
+            }
+        }))
     }
-
 
 
     return (
@@ -72,13 +76,13 @@ function App() {
 
             <h2></h2>
 
-            <TaskList completeTask={completeTask} removeTask={removeTask} day={'monday'} tasks={tasks}/>
-            <TaskList completeTask={completeTask} removeTask={removeTask} day={'tuesday'} tasks={tasks}/>
-            <TaskList completeTask={completeTask} removeTask={removeTask} day={'wednesday'} tasks={tasks}/>
-            <TaskList completeTask={completeTask} removeTask={removeTask} day={'thursday'} tasks={tasks}/>
-            <TaskList completeTask={completeTask} removeTask={removeTask} day={'friday'} tasks={tasks}/>
-            <TaskList completeTask={completeTask} removeTask={removeTask} day={'saturday'} tasks={tasks}/>
-            <TaskList completeTask={completeTask} removeTask={removeTask} day={'sunday'} tasks={tasks}/>
+            <TaskList toggleComplete={toggleComplete} removeTask={removeTask} day={'monday'} tasks={tasks}/>
+            <TaskList toggleComplete={toggleComplete} removeTask={removeTask} day={'tuesday'} tasks={tasks}/>
+            <TaskList toggleComplete={toggleComplete} removeTask={removeTask} day={'wednesday'} tasks={tasks}/>
+            <TaskList toggleComplete={toggleComplete} removeTask={removeTask} day={'thursday'} tasks={tasks}/>
+            <TaskList toggleComplete={toggleComplete} removeTask={removeTask} day={'friday'} tasks={tasks}/>
+            <TaskList toggleComplete={toggleComplete} removeTask={removeTask} day={'saturday'} tasks={tasks}/>
+            <TaskList toggleComplete={toggleComplete} removeTask={removeTask} day={'sunday'} tasks={tasks}/>
 
         </div>
     );
