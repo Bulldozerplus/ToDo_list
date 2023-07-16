@@ -53,13 +53,26 @@ function App() {
     function toggleComplete(id) {
         setTasks(prevState => prevState.map(task => {
             if (task.id === id) {
-               return task.isDone = !task.isDone
+               return {...task, isDone: true}
             } else {
                 return task
             }
         }))
     }
 
+        function editCurrentTask(editFields, id) {
+            setTasks(tasks.map(task => {
+                if (task.id === id) {
+                    return {
+                        ...task, editFields
+                    }
+                }
+                else {
+                    return task
+                }
+            }))
+
+        }
 
     return (
         <div className="App">
@@ -76,13 +89,13 @@ function App() {
 
             <h2></h2>
 
-            <TaskList toggleComplete={toggleComplete} removeTask={removeTask} day={'monday'} tasks={tasks}/>
-            <TaskList toggleComplete={toggleComplete} removeTask={removeTask} day={'tuesday'} tasks={tasks}/>
-            <TaskList toggleComplete={toggleComplete} removeTask={removeTask} day={'wednesday'} tasks={tasks}/>
-            <TaskList toggleComplete={toggleComplete} removeTask={removeTask} day={'thursday'} tasks={tasks}/>
-            <TaskList toggleComplete={toggleComplete} removeTask={removeTask} day={'friday'} tasks={tasks}/>
-            <TaskList toggleComplete={toggleComplete} removeTask={removeTask} day={'saturday'} tasks={tasks}/>
-            <TaskList toggleComplete={toggleComplete} removeTask={removeTask} day={'sunday'} tasks={tasks}/>
+            <TaskList editCurrentTask={editCurrentTask} toggleComplete={toggleComplete} removeTask={removeTask} day={'monday'} tasks={tasks}/>
+            <TaskList editCurrentTask={editCurrentTask} toggleComplete={toggleComplete} removeTask={removeTask} day={'tuesday'} tasks={tasks}/>
+            <TaskList editCurrentTask={editCurrentTask} toggleComplete={toggleComplete} removeTask={removeTask} day={'wednesday'} tasks={tasks}/>
+            <TaskList editCurrentTask={editCurrentTask} toggleComplete={toggleComplete} removeTask={removeTask} day={'thursday'} tasks={tasks}/>
+            <TaskList editCurrentTask={editCurrentTask} toggleComplete={toggleComplete} removeTask={removeTask} day={'friday'} tasks={tasks}/>
+            <TaskList editCurrentTask={editCurrentTask} toggleComplete={toggleComplete} removeTask={removeTask} day={'saturday'} tasks={tasks}/>
+            <TaskList editCurrentTask={editCurrentTask} toggleComplete={toggleComplete} removeTask={removeTask} day={'sunday'} tasks={tasks}/>
 
         </div>
     );
