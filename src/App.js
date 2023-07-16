@@ -64,7 +64,7 @@ function App() {
             setTasks(tasks.map(task => {
                 if (task.id === id) {
                     return {
-                        ...task, editFields
+                        ...task, ...editFields
                     }
                 }
                 else {
@@ -73,6 +73,8 @@ function App() {
             }))
 
         }
+
+
 
     return (
         <div className="App">
